@@ -1,0 +1,17 @@
+
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --list --zookeeper hdp1.local:2181,hdp2.local:2181,hdp3.local:2181
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --delete --zookeeper hdp1.local:2181,hdp2.local:2181,hdp3.local:2181 --topic logs
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper hdp1.local:2181,hdp2.local:2181,hdp3.local:2181  --replication-factor 1 --partition 1 --topic logs
+
+/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --zookeeper hdp1.local:2181,hdp2.local:2181,hdp3.local:2181 --topic logs
+
+/usr/hdp/current/kafka-broker/bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server hdp1.local:6667,hdp2.local:6667,hdp3.local:6667 --list
+/usr/hdp/current/kafka-broker/bin/kafka-consumer-groups.sh  --list --zookeeper hdp1.local:2181,hdp2.local:2181,hdp3.local:2181
+
+
+/usr/hdp/current/kafka-broker/bin/kafka-consumer-groups.sh  --list --bootstrap-server hdp1.local:6667,hdp2.local:6667,hdp3.local:6667
+
+/usr/hdp/current/kafka-broker/bin/zookeeper-shell.sh hdp1.local:2181,hdp2.local:2181,hdp3.local:2181
+
+
+

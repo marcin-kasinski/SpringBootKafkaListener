@@ -1,0 +1,68 @@
+logging:
+    file: logs/application.log
+server:
+    port: 9191
+spring:
+    application:
+        name: SpringBootKafkaListener
+#spring.jpa.hibernate.ddl-auto=create
+    datasource:
+        url: jdbc:mysql://mysql:3306/test
+        username: root
+        password: secret
+#spring.datasource.driver-class-name=Driver
+# Allows Hibernate to generate SQL optimized for a particular DBMS
+    jpa:
+        properties:
+            hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+            hibernate.show_sql: true
+    rabbitmq:
+        host:tools.local
+        password:guest
+        port:5672
+    zipkin:
+        baseUrl: http://springbootzipkin:7777
+    sleuth:
+        sampler:
+            percentage: 1
+    cloud:
+        stream:
+            defaultBinder: kafka1        
+            bindings:
+                worksChannel:
+                  destination: my-topic
+#                  content-type: application/json
+                  content-type: text/plain
+                  consumer:
+#                    content-type: application/json                     
+                    content-type: text/plain
+                    ​headerMode: raw
+                    valueDerserializer: org.apache.kafka.common.serialization.StringDeserializer
+                    keyDerserializer: org.apache.kafka.common.serialization.StringDeserializer
+                    configuration:
+                        value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+                        key.deserializer: org.apache.kafka.common.serialization.StringDeserializer                        
+                        value:
+                            deserializer: org.apache.kafka.common.serialization.StringDeserializer
+                        key:
+                            deserializer: org.apache.kafka.common.serialization.StringDeserializer
+                  binder: kafka1
+            binders:
+                kafka1:
+                    type: kafka
+                    environment:
+                        spring:
+                            cloud:
+                                stream:
+                                    kafka:
+                                        binder:
+#                                           brokers: hdp1.local:6667,hdp2.local:6667,hdp3.local:6667
+                                            brokers: kafka-service:9092
+            kafka:
+                binder:
+                    brokers: kafka-service
+                    zkNodes: kafka-service
+                    defaultZkPort: 2181
+                    defaultBrokerPort: 9092
+#                        configuration:
+#                            value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
