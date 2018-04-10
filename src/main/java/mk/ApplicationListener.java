@@ -2,6 +2,7 @@ package mk;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -63,6 +64,15 @@ public class ApplicationListener {
 //	protected Logger logger = Logger.getLogger(Application.class.getName());
 
 	public static void main(String[] args) {
+
+
+		System.out.println("ENV variables");
+		
+
+		Map<String, String> env = System.getenv();
+		for (String envName : env.keySet()) {
+			System.out.format("%s=%s%n", envName, env.get(envName));
+		}
 
 	SpringApplication.run(ApplicationListener.class, args);
 
