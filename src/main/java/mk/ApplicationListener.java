@@ -14,12 +14,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-import brave.Span;
-import brave.Tracer;
+//import brave.Span;
+//import brave.Tracer;
 
 
-//import org.springframework.cloud.sleuth.Span;
-//import org.springframework.cloud.sleuth.Tracer;
+import org.springframework.cloud.sleuth.Span;
+import org.springframework.cloud.sleuth.Tracer;
 //import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -103,7 +103,7 @@ public class ApplicationListener {
 		}
 		 
 		 
-		 /*
+
 
 //----------------------------------- 1.5.10 -----------------------------------
 		   Span newSpan= Span.builder()
@@ -118,7 +118,7 @@ public class ApplicationListener {
 		    //tracer.createSpan(ApplicationListener.class.getName(),newSpan);
 		    tracer.continueSpan(newSpan);
 //----------------------------------- 1.5.10 -----------------------------------
-		*/
+
 	
 		 
 		 
