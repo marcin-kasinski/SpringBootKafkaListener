@@ -12,9 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.sleuth.Span;
-import org.springframework.cloud.sleuth.Tracer;
-import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
+
+
+import brave.Span;
+import brave.Tracer;
+
+
+//import org.springframework.cloud.sleuth.Span;
+//import org.springframework.cloud.sleuth.Tracer;
+//import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
+
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
@@ -95,6 +102,10 @@ public class ApplicationListener {
 			e2.printStackTrace();
 		}
 		 
+		 
+		 /*
+
+//----------------------------------- 1.5.10 -----------------------------------
 		   Span newSpan= Span.builder()
 //					.spanId(1l)
 					.spanId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE)
@@ -106,7 +117,23 @@ public class ApplicationListener {
 		    
 		    //tracer.createSpan(ApplicationListener.class.getName(),newSpan);
 		    tracer.continueSpan(newSpan);
-			   log.info("orderIn.getId() " + orderIn.getId() );
+//----------------------------------- 1.5.10 -----------------------------------
+		*/
+	
+		 
+		 
+
+
+//----------------------------------- 2.0.1 -----------------------------------
+
+
+
+//----------------------------------- 2.0.1 -----------------------------------
+
+
+		 
+		    
+		    log.info("orderIn.getId() " + orderIn.getId() );
 		   
 		   if (1==1) return;
 		   
@@ -133,10 +160,10 @@ public class ApplicationListener {
 			// You can log an event on a span
 //			newSpan.logEvent("taxCalculated");
 
-		    log.info("newSpan.getParents().size(): " + newSpan.getParents().size());
-		    log.info("newSpan.getParents().get(0).longValue(): " + newSpan.getParents().get(0).longValue());
-		    log.info("Span.hexToId(order.getSpanTraceId()): " + Span.hexToId(order.getSpanTraceId()));
-		    log.info("newSpan.getProcessId(): " + newSpan.getProcessId());
+//		    log.info("newSpan.getParents().size(): " + newSpan.getParents().size());
+//		    log.info("newSpan.getParents().get(0).longValue(): " + newSpan.getParents().get(0).longValue());
+//		    log.info("Span.hexToId(order.getSpanTraceId()): " + Span.hexToId(order.getSpanTraceId()));
+//		    log.info("newSpan.getProcessId(): " + newSpan.getProcessId());
 					log.info("Read data: " + order.getParentId());
 		log.info("Read data: " + order.getSpanTraceId());
 		log.info("Read data: " + order.getId());
