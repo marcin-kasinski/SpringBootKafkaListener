@@ -8,18 +8,19 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 //import brave.Span;
-//import brave.Tracer;
+import brave.Span;
+import brave.Tracer;
+import brave.propagation.TraceContext;
+import brave.internal.HexCodec;
 
-
-import org.springframework.cloud.sleuth.Span;
-import org.springframework.cloud.sleuth.Tracer;
+//import org.springframework.cloud.sleuth.Span;
+//import org.springframework.cloud.sleuth.Tracer;
 //import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -104,7 +105,7 @@ public class ApplicationListener {
 		 
 		 
 
-
+/*
 //----------------------------------- 1.5.10 -----------------------------------
 		   Span newSpan= Span.builder()
 //					.spanId(1l)
@@ -118,7 +119,7 @@ public class ApplicationListener {
 		    //tracer.createSpan(ApplicationListener.class.getName(),newSpan);
 		    tracer.continueSpan(newSpan);
 //----------------------------------- 1.5.10 -----------------------------------
-
+*/
 	
 		 
 		 
@@ -127,6 +128,13 @@ public class ApplicationListener {
 //----------------------------------- 2.0.1 -----------------------------------
 
 
+
+		 
+		 TraceContext context = TraceContext.newBuilder()
+			      .traceId(  HexCodec.lowerHexToUnsignedLong(orderIn.getSpanTraceId())        )
+			      .spanId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE)
+			      .sampled(true).build();
+		 Span continuedSpan = this.tracer.joinSpan(context);
 
 //----------------------------------- 2.0.1 -----------------------------------
 
