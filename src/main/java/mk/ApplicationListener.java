@@ -13,16 +13,20 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-//import brave.Span;
+/*
+//----------------------------------- 2.0.1 -----------------------------------
 import brave.Span;
 import brave.Tracer;
 import brave.propagation.TraceContext;
 import brave.internal.HexCodec;
 
-//import org.springframework.cloud.sleuth.Span;
-//import org.springframework.cloud.sleuth.Tracer;
+//----------------------------------- 2.0.1 -----------------------------------
+*/
+//----------------------------------- 1.5.10 -----------------------------------
+import org.springframework.cloud.sleuth.Span;
+import org.springframework.cloud.sleuth.Tracer;
 //import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
-
+//----------------------------------- 1.5.10 -----------------------------------
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
@@ -105,7 +109,7 @@ public class ApplicationListener {
 		 
 		 
 
-/*
+
 //----------------------------------- 1.5.10 -----------------------------------
 		   Span newSpan= Span.builder()
 //					.spanId(1l)
@@ -119,12 +123,10 @@ public class ApplicationListener {
 		    //tracer.createSpan(ApplicationListener.class.getName(),newSpan);
 		    tracer.continueSpan(newSpan);
 //----------------------------------- 1.5.10 -----------------------------------
-*/
-	
-		 
+
 		 
 
-
+/*
 //----------------------------------- 2.0.1 -----------------------------------
 
 
@@ -137,7 +139,7 @@ public class ApplicationListener {
 		 Span continuedSpan = this.tracer.joinSpan(context);
 
 //----------------------------------- 2.0.1 -----------------------------------
-
+*/
 
 		 
 		    
