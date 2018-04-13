@@ -35,6 +35,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.InboundChannelAdapter;
 import org.springframework.integration.annotation.Poller;
 import org.springframework.integration.core.MessageSource;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.client.RestTemplate;
@@ -93,16 +94,19 @@ public class ApplicationListener {
 
 	 @StreamListener(WorkUnitsSink.CHANNEL_NAME)
 //		public void processOrder( String orderString ) {
-			public void processOrder( WorkUnit orderIn, @Headers Map<String, String> headers) {
+//			public void processOrder( WorkUnit orderIn, @Headers Map<String, String> headers) {
+			public void processOrder(WorkUnit orderIn,@Header("header1") String header1) {
 
 		 
 		 
+/*
 			log.info("headers: ");
 
-			 for (Map.Entry<String, String> entry : headers.entrySet())
-			 {
-				 log.info(entry.getKey() + "/" + entry.getValue());
-			 }
+		 for (Map.Entry<String, String> entry : headers.entrySet())
+		 {
+			 log.info(entry.getKey() + "/" + entry.getValue());
+		 }
+	*/	 
 //		 String orderString = new String(orderData);
 		 String orderString = new String("SSS");
 		 
