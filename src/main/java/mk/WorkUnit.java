@@ -41,6 +41,12 @@ public class WorkUnit {
 		return spanTraceId;
 	}
 
+	@Override
+	public String toString() {
+		return "WorkUnit [id=" + id + ", definition=" + definition + ", spanTraceId=" + spanTraceId + ", parentId="
+				+ parentId + "]";
+	}
+
 	
     
 }

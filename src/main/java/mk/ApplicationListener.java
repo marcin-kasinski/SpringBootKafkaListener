@@ -109,6 +109,9 @@ public class ApplicationListener {
 			 log.info(entry.getKey() + "/" + entry.getValue());
 		 }
 
+			log.info("headers END: ");
+			log.info("orderIn: "+orderIn);
+		 
 //		 String orderString = new String(orderData);
 		 String orderString = new String("SSS");
 		 
@@ -123,6 +126,7 @@ public class ApplicationListener {
 		}
 		 
 		 
+			log.info("before new span");
 
 
 //----------------------------------- 1.5.10 -----------------------------------
@@ -137,7 +141,10 @@ public class ApplicationListener {
 		    
 		    //tracer.createSpan(ApplicationListener.class.getName(),newSpan);
 		    tracer.continueSpan(newSpan);
+			log.info("after new span");
+
 //----------------------------------- 1.5.10 -----------------------------------
+
 
 		 
 
