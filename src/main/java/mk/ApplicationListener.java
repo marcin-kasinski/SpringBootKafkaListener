@@ -94,21 +94,21 @@ public class ApplicationListener {
 
 	 @StreamListener(WorkUnitsSink.CHANNEL_NAME)
 //		public void processOrder( String orderString ) {
-//			public void processOrder( WorkUnit orderIn, @Headers Map<String, String> headers) {
-			public void processOrder(WorkUnit orderIn,@Header("header1") String header1) {
+			public void processOrder( WorkUnit orderIn, @Headers Map<String, String> headers) {
+//			public void processOrder(WorkUnit orderIn,@Header("header1") String header1) {
 
-			log.info("header1: "+header1);
+//			log.info("header1: "+header1);
 
 			
 		 
-/*
+
 			log.info("headers: ");
 
 		 for (Map.Entry<String, String> entry : headers.entrySet())
 		 {
 			 log.info(entry.getKey() + "/" + entry.getValue());
 		 }
-	*/	 
+
 //		 String orderString = new String(orderData);
 		 String orderString = new String("SSS");
 		 
