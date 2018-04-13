@@ -97,7 +97,9 @@ public class ApplicationListener {
 //			public void processOrder( WorkUnit orderIn, @Headers Map<String, String> headers) {
 			public void processOrder(WorkUnit orderIn,@Header("header1") String header1) {
 
-		 
+			log.info("header1: "+header1);
+
+			
 		 
 /*
 			log.info("headers: ");
