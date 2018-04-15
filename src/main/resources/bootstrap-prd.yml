@@ -32,6 +32,29 @@ spring:
                 worksChannel:
                     destination: my-topic
                     content-type: application/json
+            binders:
+                rabbit1:
+                    type: rabbit
+                    environment:
+                        spring:
+                            rabbitmq:
+                                host: rabbitmq
+                                port: 5672
+                                username: guest
+                                password: guest
+                                virtual-host: /
+                kafka:
+                    type: kafka
+                    environment:
+                        spring:
+                            cloud:
+                                stream:
+                                    kafka:
+                                        binder:
+                                            brokers: kafka-service
+                                            zkNodes: kafka-service
+                                            defaultZkPort: 2181
+                                            defaultBrokerPort: 9092
             kafka:
                 binder:
                     brokers: kafka-service
