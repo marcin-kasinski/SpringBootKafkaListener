@@ -151,14 +151,14 @@ public class ApplicationListener {
 //----------------------------------- 2.0.1 -----------------------------------
 
 
-
+/*
 		 
 		 TraceContext context = TraceContext.newBuilder()
 			      .traceId(  HexCodec.lowerHexToUnsignedLong(orderIn.getSpanTraceId())        )
 			      .spanId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE)
 			      .sampled(true).build();
 		 Span continuedSpan = this.tracer.joinSpan(context);
-
+*/
 //----------------------------------- 2.0.1 -----------------------------------
 
 
