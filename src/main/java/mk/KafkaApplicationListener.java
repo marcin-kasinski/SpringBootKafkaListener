@@ -150,21 +150,15 @@ public class KafkaApplicationListener {
 
 
 //----------------------------------- 2.0.1 -----------------------------------
-
-
-/*
-		 
+	 
 		 TraceContext context = TraceContext.newBuilder()
 			      .traceId(  HexCodec.lowerHexToUnsignedLong(orderIn.getSpanTraceId())        )
 			      .spanId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE)
 			      .sampled(true).build();
 		 Span continuedSpan = this.tracer.joinSpan(context);
-*/
+
 //----------------------------------- 2.0.1 -----------------------------------
 
-
-		 
-		    
 		    log.info("orderIn.getId() " + orderIn.getId() );
 		   
 		   if (1==1) return;
