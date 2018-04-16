@@ -33,18 +33,10 @@ spring:
             bindings:
                 worksChannel:
                     destination: my-topic
+                    group: order
                     content-type: application/json
+                    binder: kafka
             binders:
-                rabbit1:
-                    type: rabbit
-                    environment:
-                        spring:
-                            rabbitmq:
-                                host: rabbitmq
-                                port: 5672
-                                username: guest
-                                password: guest
-                                virtual-host: /
                 kafka:
                     type: kafka
                     environment:
