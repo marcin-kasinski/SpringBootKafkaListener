@@ -59,7 +59,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @SpringBootApplication
-public class ApplicationListener {
+public class KafkaApplicationListener {
 
     @Autowired
 	private Tracer tracer;
@@ -71,7 +71,7 @@ public class ApplicationListener {
         return new RestTemplate();
     }
 
-	 private static Logger log = LoggerFactory.getLogger(ApplicationListener.class);
+	 private static Logger log = LoggerFactory.getLogger(KafkaApplicationListener.class);
 
 
 //	protected Logger logger = Logger.getLogger(Application.class.getName());
@@ -79,7 +79,8 @@ public class ApplicationListener {
 	public static void main(String[] args) {
 
 
-		System.out.println("ENV variables");
+		System.out.println("Version 16.04.2018");
+		System.out.println("Environment variables");
 		
 
 		Map<String, String> env = System.getenv();
@@ -87,7 +88,7 @@ public class ApplicationListener {
 			System.out.format("%s=%s%n", envName, env.get(envName));
 		}
 
-	SpringApplication.run(ApplicationListener.class, args);
+	SpringApplication.run(KafkaApplicationListener.class, args);
 
 	}
 
