@@ -180,17 +180,14 @@ Dalston.SR3
 		</dependency>
 
     <!-- For Spring-boot 2.0.1 -->
-
+<!-- 
 <dependency>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-properties-migrator</artifactId>
 	<scope>runtime</scope>
 </dependency>
+ -->
 
-
-
-		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-sleuth-stream</artifactId> 
-			</dependency> -->
 	</dependencies>
 
 	
