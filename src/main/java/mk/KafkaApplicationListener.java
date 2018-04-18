@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/*
 //----------------------------------- 2.0.1 -----------------------------------
 import brave.Span;
 import brave.Tracer;
@@ -20,7 +21,7 @@ import brave.propagation.TraceContext;
 
 
 //----------------------------------- 2.0.1 -----------------------------------
-
+*/
 //----------------------------------- 1.5.10 -----------------------------------
 //import org.springframework.cloud.sleuth.Span;
 //import org.springframework.cloud.sleuth.Tracer;
@@ -61,8 +62,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootApplication
 public class KafkaApplicationListener {
 
-    @Autowired
-	private Tracer tracer;
+//    @Autowired
+//	private Tracer tracer;
     @Autowired
     private RestTemplate restTemplate;
     
@@ -79,7 +80,7 @@ public class KafkaApplicationListener {
 	public static void main(String[] args) {
 
 
-		System.out.println("Version 16.04.2018 (removed manual span creation)");
+		System.out.println("Version 16.04.2018 (removed span imports)");
 		System.out.println("Environment variables");
 		
 
