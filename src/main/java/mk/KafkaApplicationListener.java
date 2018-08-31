@@ -35,6 +35,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.InboundChannelAdapter;
 import org.springframework.integration.annotation.Poller;
 import org.springframework.integration.core.MessageSource;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.support.GenericMessage;
@@ -95,14 +98,13 @@ public class KafkaApplicationListener {
 
 	 @StreamListener(WorkUnitsSink.CHANNEL_NAME)
 //		public void processOrder( String orderString ) {
-			public void processOrder( WorkUnit orderIn, @Headers Map<Object, Object> headers) {
-//			public void processOrder(WorkUnit orderIn,@Header("header1") String header1) {
 
-//			log.info("header1: "+header1);
+	 public void processOrder( Message<WorkUnit> message, @Headers Map<Object, Object> headers) {
+//		 public void processOrder( WorkUnit orderIn, @Headers Map<Object, Object> headers) {
 
-			
 		 
-
+		 WorkUnit orderIn= message.getPayload();
+		 
 			log.info("headers: ");
 
 		 for (Map.Entry<Object, Object> entry : headers.entrySet())
@@ -210,6 +212,15 @@ public class KafkaApplicationListener {
 	        log.info("Microservice executing exception: "+e.getLocalizedMessage());
 			
 		}
+		
+		
+		 Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
+	        if (acknowledgment != null) {
+	        	log.info("Acknowledgment provided");
+	            acknowledgment.acknowledge();
+	        }
+	        else 	        	log.info("Acknowledgment provided");
+
 
 	}
 	
