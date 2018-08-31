@@ -52,6 +52,10 @@ spring:
                                             defaultZkPort: 2181
                                             defaultBrokerPort: 9092
             kafka:
+                bindings:
+                    worksChannel:
+                        consumer:
+                            autoCommitOffset: false
                 binder:
 #                    brokers: kafka-service
 #                    zkNodes: kafka-service
