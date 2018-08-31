@@ -171,7 +171,7 @@ public class KafkaApplicationListener {
 		        	log.info("Acknowledgment provided");
 		            acknowledgment.acknowledge();
 		        }
-		        else 	        	log.info("Acknowledgment provided");
+		        else 	        	log.info("Acknowledgment not provided");
 
 		    
 		    
