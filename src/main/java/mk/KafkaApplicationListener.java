@@ -162,8 +162,19 @@ public class KafkaApplicationListener {
 
 //----------------------------------- 2.0.1 -----------------------------------
 
+		    log.info("orderIn " + orderIn);
 		    log.info("orderIn.getId() " + orderIn.getId() );
 		   
+			
+			 Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
+		        if (acknowledgment != null) {
+		        	log.info("Acknowledgment provided");
+		            acknowledgment.acknowledge();
+		        }
+		        else 	        	log.info("Acknowledgment provided");
+
+		    
+		    
 		   if (1==1) return;
 		   
 		   
@@ -213,15 +224,7 @@ public class KafkaApplicationListener {
 			
 		}
 		
-		
-		 Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
-	        if (acknowledgment != null) {
-	        	log.info("Acknowledgment provided");
-	            acknowledgment.acknowledge();
-	        }
-	        else 	        	log.info("Acknowledgment provided");
-
-
+	
 	}
 	
 	/*
