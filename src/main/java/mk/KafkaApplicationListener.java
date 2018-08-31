@@ -83,7 +83,8 @@ public class KafkaApplicationListener {
 	public static void main(String[] args) {
 
 
-		System.out.println("Version 16.04.2018 (removed span imports)");
+		System.out.println("Version 31.08.2018");
+		
 		System.out.println("Environment variables");
 		
 
