@@ -4,8 +4,14 @@
 	<groupId>SpringBootKafkaListener</groupId>
 	<artifactId>SpringBootKafkaListener</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.5.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
 
 		<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,15 +27,34 @@ Edgware.SR3
 Dalston.SR3
  -->
  		
-  		<spring-cloud.version>Finchley.M9</spring-cloud.version>
+  		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
 <!-- 		<spring-boot-version>1.5.10.RELEASE</spring-boot-version> --> 
-  		<spring-boot-version>2.0.1.RELEASE</spring-boot-version>
+  		<spring-boot-version>2.0.5.RELEASE</spring-boot-version>
   		<start-class>mk.KafkaApplicationListener</start-class>
 	</properties>
 
 	<build>
-   <sourceDirectory>src/main/java/</sourceDirectory>
+<!--    <sourceDirectory>src/main/java/</sourceDirectory> -->
 		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+<!-- 
+				<configuration>
+					<mainClass>${start-class}</mainClass>
+					<layout>ZIP</layout>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+ -->
+
+			</plugin>
+
 
 	<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -42,28 +67,13 @@ Dalston.SR3
 				</configuration>
 			</plugin>
 
-       <plugin>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-maven-plugin</artifactId>
-      <configuration>
-        <mainClass>${start-class}</mainClass>
-        <layout>ZIP</layout>
-      </configuration>
-      <executions>
-        <execution>
-          <goals>
-            <goal>repackage</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>		
-	
 
 			<!-- .... other plugins ... -->
 
 			<!-- =========================================== -->
 			<!-- make sure antrun is after packaging plugins -->
 			<!-- =========================================== -->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -78,21 +88,8 @@ Dalston.SR3
 						<configuration>
 							<target>
 							
-											<copy file="${project.build.directory}/${project.artifactId}-${project.version}.jar" tofile="${project.basedir}/docker/${project.artifactId}-${project.version}.jar" />
+							<copy file="${project.build.directory}/${project.artifactId}-${project.version}.jar" tofile="${project.basedir}/docker/${project.artifactId}-${project.version}.jar" />
 					
-								<!-- keyfile+passphrase or password, choose one -->
-								<!-- <scp localFile="${project.basedir}/target/qos-spark-1.0.jar" 
-									remoteToFile="root@kubernetes1.local:/usr/sanss" verbose="true" keyfile="C:\Users\shengw\.ssh\192.168.203.156\id_rsa" 
-									passphrase=""> </scp> -->
-					<!-- 			<scp localFile="${project.basedir}/target/SpringBootKafkaListener-0.0.1-SNAPSHOT.jar"
-									remoteToFile="marcin@tools.local:/home/marcin/SpringBootKafkaListener/docker" verbose="true" password="1qaz2wsx"
-									trust="true">
-								</scp>
-
-	
-							<sshexec host="tools.local" trust="yes" username="marcin"
-									password="1qaz2wsx" command="sed -i -e 's/\r//g' /home/marcin/SpringBootKafkaListener/kubernetes/deploy.sh;sh /home/marcin/SpringBootKafkaListener/kubernetes/deployXXX.sh" />
- -->
 							</target>
 						</configuration>
 					</execution>
@@ -191,40 +188,34 @@ Dalston.SR3
 	</dependencies>
 
 	
-    <dependencyManagement> 
-  <dependencies> 
+	<dependencyManagement>
+		<dependencies>
 
-<dependency>
-			<!-- Import dependency management from Spring Boot -->
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-dependencies</artifactId>
-			<version>${spring-boot-version}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
+			<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-dependencies</artifactId> 
+				<version>${spring-boot-version}</version> <type>pom</type> <scope>import</scope> 
+				</dependency> -->
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
 
 
-     <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>${spring-cloud.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/libs-milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
-  </dependencies> 
-</dependencyManagement> 
-  
-  
-  <repositories>
-    <repository>
-        <id>spring-milestones</id>
-        <name>Spring Milestones</name>
-        <url>https://repo.spring.io/libs-milestone</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </repository>
-</repositories>
-  
 </project>

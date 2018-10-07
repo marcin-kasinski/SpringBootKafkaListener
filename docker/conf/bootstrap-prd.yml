@@ -49,7 +49,7 @@ spring:
            #zkNodes: zk-0.zk-hs.default.svc.cluster.local,zk-1.zk-hs.default.svc.cluster.local,zk-2.zk-hs.default.svc.cluster.local/kafka
            defaultZkPort: 2181
            #defaultBrokerPort: 9092
-           defaultBrokerPort: 9093
+           defaultBrokerPort: 9092
    kafka:
     bindings:
      worksChannel:
