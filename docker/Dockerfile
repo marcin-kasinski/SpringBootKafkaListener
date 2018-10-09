@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:9
 MAINTAINER Marcin Kasiński <marcin.kasinski@gmail.com> 
 
 
