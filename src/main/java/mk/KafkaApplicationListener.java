@@ -32,6 +32,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.integration.annotation.InboundChannelAdapter;
 import org.springframework.integration.annotation.Poller;
 import org.springframework.integration.core.MessageSource;
@@ -44,6 +45,9 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import reactor.core.publisher.EmitterProcessor;
+import reactor.core.publisher.Flux;
 
 
 
@@ -97,6 +101,13 @@ public class KafkaApplicationListener {
 
 	}
 
+	 private final EmitterProcessor<ServerSentEvent<WorkUnit>> emitter = EmitterProcessor.create();	
+	
+	 public Flux<ServerSentEvent<WorkUnit>> get()
+	    {
+	        return emitter.log();
+	    }	 
+	 
 	 @StreamListener(WorkUnitsSink.CHANNEL_NAME)
 //		public void processOrder( String orderString ) {
 
@@ -105,6 +116,8 @@ public class KafkaApplicationListener {
 
 		 
 		 WorkUnit orderIn= message.getPayload();
+		 
+		 emitter.onNext(ServerSentEvent.builder(orderIn).id(UUID.randomUUID().toString()).build());
 		 
 			log.info("headers: ");
 
