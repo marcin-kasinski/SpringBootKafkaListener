@@ -36,9 +36,13 @@ public class EventController {
 
 	    	List<WorkUnit> wus = new ArrayList<>();
 
-	    	eventConsumer.get().subscribe(wus::add);
-
-	    	Mono<Long> count=eventConsumer.get().count();
+	    	Flux<WorkUnit>   obj= eventConsumer.get();
+	    	
+	    	obj.subscribe(wus::add);
+	    	
+	    	if (wus.size()==0) return null;
+	    	
+	    	Mono<Long> count=obj.count();
 	    	WorkUnit wu=wus.get(0);
 	    	wu.setDefinition("mkdefinition");
 	    	wu.setId("mkid");
@@ -47,6 +51,8 @@ public class EventController {
 
 	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu "+wu);
 	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu count "+count);
+	    	
+//	    	if (count.)
 	    	
 	    	return Flux.just(ServerSentEvent.builder(wu).id(UUID.randomUUID().toString()).build())
 	    	  .log();
