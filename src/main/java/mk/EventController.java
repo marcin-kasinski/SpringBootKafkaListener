@@ -11,6 +11,7 @@ import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,7 +31,7 @@ public class EventController {
 
 	    @CrossOrigin(origins = "*")
 	    @GetMapping(name = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	    public Flux<ServerSentEvent<WorkUnit>> getEvents()
+	    public Flux<ServerSentEvent<WorkUnit>> getEvents(@RequestParam(value = "id", defaultValue = ".") String id)
 	    {
 	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events");
 
@@ -71,6 +72,10 @@ public class EventController {
 	    	//eventConsumer.get().flatMap(mapper)
 	    	//WorkUnit wu=  	eventConsumer.get();
 	       // return eventConsumer.get();
-	    	return obj;
+	    	return obj.filter(
+	    			  s -> s.data().getSpanTraceId().equals(id)
+	    			
+	    			
+	    			);
 	}
 }
