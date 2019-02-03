@@ -37,6 +37,7 @@ public class EventController {
 	    	List<ServerSentEvent> wus = new ArrayList<>();
 
 	    	Flux<ServerSentEvent<WorkUnit>>   obj= eventConsumer.get();
+	    	log.info("obj "+obj.toString());
 	    	
 	    	obj.subscribe(wus::add);
 
@@ -44,7 +45,7 @@ public class EventController {
 
 	    	
 //	    	if (wus.size()==0) return Flux.empty();
-	    	if (wus.size()==0) return null;
+//	    	if (wus.size()==0) return null;
 	    	
 	    	Mono<Long> count=obj.count();
 	    	
