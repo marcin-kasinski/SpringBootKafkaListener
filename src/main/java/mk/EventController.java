@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 @Controller
 public class EventController {
 
@@ -31,12 +32,13 @@ public class EventController {
 	    @GetMapping(name = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	    public Flux<ServerSentEvent<WorkUnit>> getEvents()
 	    {
-	    	System.out.println();
+	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events");
 
 	    	List<WorkUnit> wus = new ArrayList<>();
 
 	    	eventConsumer.get().subscribe(wus::add);
 
+	    	Mono<Long> count=eventConsumer.get().count();
 	    	WorkUnit wu=wus.get(0);
 	    	wu.setDefinition("mkdefinition");
 	    	wu.setId("mkid");
@@ -44,6 +46,7 @@ public class EventController {
 	    	wu.setSpanTraceId("mkspanTraceId");
 
 	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu "+wu);
+	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu count "+count);
 	    	
 	    	return Flux.just(ServerSentEvent.builder(wu).id(UUID.randomUUID().toString()).build())
 	    	  .log();
