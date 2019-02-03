@@ -43,7 +43,8 @@ public class EventController {
 	    	log.info("wus.size() "+wus.size());
 
 	    	
-	    	if (wus.size()==0) return Flux.empty();
+//	    	if (wus.size()==0) return Flux.empty();
+	    	if (wus.size()==0) return null;
 	    	
 	    	Mono<Long> count=obj.count();
 	    	

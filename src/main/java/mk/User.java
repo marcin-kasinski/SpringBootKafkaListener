@@ -1,19 +1,13 @@
 package mk;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.sql.DataSource;
-
-import javax.persistence.Table;
-//import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Bean;
-
-@Entity // This tells Hibernate to make a table out of this class
-@Table(name = "users")
+//@Entity // This tells Hibernate to make a table out of this class
+//@Table(name = "users")
 public class User {
+
+	
+//    @Id
+//    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 	
 /*	
 	@Bean
@@ -28,9 +22,6 @@ public class User {
 	}
 	*/
 	
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
 
     private String name;
 
