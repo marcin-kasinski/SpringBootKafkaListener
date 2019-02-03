@@ -34,33 +34,38 @@ public class EventController {
 	    {
 	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events");
 
-	    	List<WorkUnit> wus = new ArrayList<>();
+	    	List<ServerSentEvent> wus = new ArrayList<>();
 
-	    	Flux<WorkUnit>   obj= eventConsumer.get();
+	    	Flux<ServerSentEvent<WorkUnit>>   obj= eventConsumer.get();
 	    	
 	    	obj.subscribe(wus::add);
 	    	
-	    	if (wus.size()==0) return null;
+	    	if (wus.size()==0) return Flux.empty();
 	    	
 	    	Mono<Long> count=obj.count();
-	    	WorkUnit wu=wus.get(0);
-	    	wu.setDefinition("mkdefinition");
-	    	wu.setId("mkid");
-	    	wu.setParentId("mkparentId");
-	    	wu.setSpanTraceId("mkspanTraceId");
+	    	
+	    	ServerSentEvent<WorkUnit> readsse=wus.get(0);
+	    	WorkUnit wu=readsse.data();
+	    	
+	    	//WorkUnit wu=wus.get(0);
+	    	//wu.setDefinition("mkdefinition");
+	    	//wu.setId("mkid");
+	    	//wu.setParentId("mkparentId");
+	    	//wu.setSpanTraceId("mkspanTraceId");
 
 	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu "+wu);
 	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu count "+count);
 	    	
 //	    	if (count.)
 	    	
-	    	return Flux.just(ServerSentEvent.builder(wu).id(UUID.randomUUID().toString()).build())
-	    	  .log();
+	    	//return Flux.just(ServerSentEvent.builder(wu).id(UUID.randomUUID().toString()).build())
+	    	//  .log();
 	    	
 	    	
 	    	
 	    	//eventConsumer.get().flatMap(mapper)
 	    	//WorkUnit wu=  	eventConsumer.get();
 	       // return eventConsumer.get();
+	    	return obj;
 	}
 }

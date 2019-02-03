@@ -101,11 +101,11 @@ public class KafkaApplicationListener {
 
 	}
 
-	 //private final EmitterProcessor<ServerSentEvent<WorkUnit>> emitter = EmitterProcessor.create();	
-	 private final EmitterProcessor<WorkUnit> emitter = EmitterProcessor.create();	
+	 private final EmitterProcessor<ServerSentEvent<WorkUnit>> emitter = EmitterProcessor.create();	
+	 //private final EmitterProcessor<WorkUnit> emitter = EmitterProcessor.create();	
 	
-//	 public Flux<ServerSentEvent<WorkUnit>> get()
-	 public Flux<WorkUnit> get()
+	 public Flux<ServerSentEvent<WorkUnit>> get()
+//	 public Flux<WorkUnit> get()
 	    {
 	        return emitter.log();
 	    }	 
@@ -120,9 +120,9 @@ public class KafkaApplicationListener {
 		 WorkUnit orderIn= message.getPayload();
 		 
 		 //od razu sse buduje
-		 //emitter.onNext(ServerSentEvent.builder(orderIn).id(UUID.randomUUID().toString()).build());
-		 emitter.onNext(orderIn);
-		 
+		 emitter.onNext(ServerSentEvent.builder(orderIn).id(UUID.randomUUID().toString()).build());
+		 //emitter.onNext(orderIn);
+		 /*
 			log.info("headers: ");
 
 		 for (Map.Entry<Object, Object> entry : headers.entrySet())
@@ -132,7 +132,7 @@ public class KafkaApplicationListener {
 
 			log.info("headers END: ");
 			log.info("orderIn: "+orderIn);
-		 
+		 */
 //		 String orderString = new String(orderData);
 		 String orderString = new String("SSS");
 		 
@@ -180,13 +180,13 @@ public class KafkaApplicationListener {
 
 //----------------------------------- 2.0.1 -----------------------------------
 
-		    log.info("orderIn " + orderIn);
-		    log.info("orderIn.getId() " + orderIn.getId() );
+		   // log.info("orderIn " + orderIn);
+		   // log.info("orderIn.getId() " + orderIn.getId() );
 		   
 			
 			 Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
 		        if (acknowledgment != null) {
-		        	log.info("Acknowledgment provided");
+		     //   	log.info("Acknowledgment provided");
 		            acknowledgment.acknowledge();
 		        }
 		        else 	        	log.info("Acknowledgment not provided");
