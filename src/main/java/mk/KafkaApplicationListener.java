@@ -101,9 +101,11 @@ public class KafkaApplicationListener {
 
 	}
 
-	 private final EmitterProcessor<ServerSentEvent<WorkUnit>> emitter = EmitterProcessor.create();	
+	 //private final EmitterProcessor<ServerSentEvent<WorkUnit>> emitter = EmitterProcessor.create();	
+	 private final EmitterProcessor<WorkUnit> emitter = EmitterProcessor.create();	
 	
-	 public Flux<ServerSentEvent<WorkUnit>> get()
+//	 public Flux<ServerSentEvent<WorkUnit>> get()
+	 public Flux<WorkUnit> get()
 	    {
 	        return emitter.log();
 	    }	 
@@ -117,7 +119,9 @@ public class KafkaApplicationListener {
 		 
 		 WorkUnit orderIn= message.getPayload();
 		 
-		 emitter.onNext(ServerSentEvent.builder(orderIn).id(UUID.randomUUID().toString()).build());
+		 //od razu sse buduje
+		 //emitter.onNext(ServerSentEvent.builder(orderIn).id(UUID.randomUUID().toString()).build());
+		 emitter.onNext(orderIn);
 		 
 			log.info("headers: ");
 

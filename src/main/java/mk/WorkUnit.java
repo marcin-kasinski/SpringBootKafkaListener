@@ -5,11 +5,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WorkUnit {
 
-    private final String id;
-    private final String definition;
-    private final String spanTraceId;
-    private final String parentId;
+    private  String id;
+    private  String definition;
+    private  String spanTraceId;
+    private  String parentId;
     
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setDefinition(String definition) {
+		this.definition = definition;
+	}
+
+	public void setSpanTraceId(String spanTraceId) {
+		this.spanTraceId = spanTraceId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
 	public String getParentId() {
 		return parentId;
 	}
