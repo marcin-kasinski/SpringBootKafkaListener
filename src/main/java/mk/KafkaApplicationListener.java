@@ -117,7 +117,11 @@ public class KafkaApplicationListener {
 //		 public void processOrder( WorkUnit orderIn, @Headers Map<Object, Object> headers) {
 
 		 
+		 
 		 WorkUnit orderIn= message.getPayload();
+		 
+		 log.info("processOrder " + orderIn);
+			
 		 
 		 //od razu sse buduje
 		 emitter.onNext(ServerSentEvent.builder(orderIn).id(UUID.randomUUID().toString()).build());
