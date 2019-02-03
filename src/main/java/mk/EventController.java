@@ -39,6 +39,9 @@ public class EventController {
 	    	Flux<ServerSentEvent<WorkUnit>>   obj= eventConsumer.get();
 	    	
 	    	obj.subscribe(wus::add);
+
+	    	log.info("wus.size() "+wus.size());
+
 	    	
 	    	if (wus.size()==0) return Flux.empty();
 	    	
