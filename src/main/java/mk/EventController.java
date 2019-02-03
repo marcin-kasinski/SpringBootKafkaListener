@@ -33,8 +33,8 @@ public class EventController {
 	    @GetMapping(name = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	    public Flux<ServerSentEvent<WorkUnit>> getEvents(@RequestParam(value = "id", defaultValue = ".") String id)
 	    {
-	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events");
-
+	    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events for id "+id);
+/*
 	    	List<ServerSentEvent> wus = new ArrayList<>();
 
 	    	Flux<ServerSentEvent<WorkUnit>>   obj= eventConsumer.get();
@@ -68,11 +68,11 @@ public class EventController {
 	    	//  .log();
 	    	
 	    	
-	    	
+	*/    	
 	    	//eventConsumer.get().flatMap(mapper)
 	    	//WorkUnit wu=  	eventConsumer.get();
 	       // return eventConsumer.get();
-	    	return obj.filter(
+	    	return eventConsumer.get().filter(
 	    			  s -> s.data().getSpanTraceId().equals(id)
 	    			
 	    			
