@@ -1,6 +1,8 @@
 package mk;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
@@ -97,6 +99,12 @@ public class KafkaApplicationListener {
 			System.out.format("%s=%s%n", envName, env.get(envName));
 		}
 
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		System.out.println("Current relative path is: " + s);
+		
+		
+		
 	SpringApplication.run(KafkaApplicationListener.class, args);
 
 	}

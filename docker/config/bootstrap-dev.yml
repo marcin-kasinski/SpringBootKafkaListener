@@ -1,3 +1,5 @@
+app.kafkaadmin.bootsrtapservers: k8smaster:9093
+
 logging:
  file: logs/application.log
 server:
@@ -51,8 +53,8 @@ spring:
         stream:
          kafka:
           binder:
-           brokers: mainserver
-           zkNodes: mainserver
+           brokers: 192.168.1.11
+           zkNodes: 192.168.1.11
            defaultZkPort: 2181
            defaultBrokerPort: 9092
    kafka:
