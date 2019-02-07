@@ -20,6 +20,8 @@ import org.apache.kafka.common.TopicPartitionInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import mk.data.TopicsList;
+
 
 @Component
 public class KafkaManager {
@@ -45,14 +47,31 @@ public class KafkaManager {
 		        adminClient.describeCluster();
 		}
 
-	public Map<String, TopicListing> listTopics() throws InterruptedException, ExecutionException
+	public TopicsList getTopics() throws InterruptedException, ExecutionException
 	{
-        System.out.println("listTopics");
+        System.out.println("getTopics");
 
 		ListTopicsResult listTopicsResult = adminClient.listTopics();
 		Map<String, TopicListing> availableTopics = listTopicsResult.namesToListings().get();
         System.out.println(availableTopics);
-        return availableTopics;
+        
+        TopicsList topicsList= new TopicsList();
+        topicsList.setId("mkid");
+        
+        
+        
+        
+        System.out.println("listing");
+        
+        for (Entry<String, TopicListing> entry :  listTopicsResult.namesToListings().get().entrySet()    ) {
+			///System.out.println("ISR "+ isr);
+			
+        	TopicListing  topicListing=entry.getValue();
+            System.out.println("topicListing "+topicListing);
+			topicsList.addTopic(topicListing.name());
+		}
+        
+        return topicsList;
 	}
 	
 	

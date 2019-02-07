@@ -1,5 +1,4 @@
-app.kafkaadmin.bootsrtapservers: k8smaster:9093
-
+app.kafkaadmin.bootsrtapservers: k8smaster:9092
 logging:
  file: logs/application.log
 server:

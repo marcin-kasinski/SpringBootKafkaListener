@@ -1,76 +1,70 @@
 package mk;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import mk.data.TopicsList;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 @RestController
 public class EventController {
 
 
-	KafkaManager kafkaManager;
+	//KafkaManager kafkaManager;
 	
 	 private static Logger log = LoggerFactory.getLogger(EventController.class);
 
 	   private KafkaApplicationListener eventConsumer;
 
-	    public EventController(KafkaApplicationListener eventConsumer, KafkaManager kafkaManager)
+	    public EventController(KafkaApplicationListener eventConsumer)
 	    {
 	        this.eventConsumer = eventConsumer;
-	        this.kafkaManager = kafkaManager;
-	    	 kafkaManager.init();
 	    }
-
+	    
+		 private ExecutorService nonBlockingService = Executors
+			      .newCachedThreadPool();
+		/*
 	    @CrossOrigin(origins = "*")
-//	    @GetMapping(name = "/topics", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	    //@GetMapping(name = "/topics")
-	    @RequestMapping("/topics")
-//	    public Flux<ServerSentEvent<WorkUnit>> getTopics(
-   	    public String getTopics(
-	    		//@RequestParam(value = "id", defaultValue = ".") String id
-	    		) throws InterruptedException, ExecutionException
-	    {
-	    	log.info("executing /topics");
-
-	    	//eventConsumer.get().flatMap(mapper)
-	    	//WorkUnit wu=  	eventConsumer.get();
-	       // return eventConsumer.get();
-	    	
-	    	WorkUnit wu=new WorkUnit("", "", "", "");
-	    	wu.setDefinition("mkdefinition");
-	    	wu.setId("mkid");
-	    	wu.setParentId("mkparentId");
-	    	wu.setSpanTraceId("mkspanTraceId");
-
-	    	kafkaManager.listTopics();
-	    	kafkaManager.describeTopic("my-topic");
-
-	    	return wu.toString();
-	}
-
-		@CrossOrigin(origins = "*")
 			    @GetMapping(name = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 			    public Flux<ServerSentEvent<WorkUnit>> getEvents(@RequestParam(value = "id", defaultValue = ".") String id)
 			    {
 			    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events for id "+id);
-		/*
-			    	List<ServerSentEvent> wus = new ArrayList<>();
+	
+		    	//eventConsumer.get().flatMap(mapper)
+			    	//WorkUnit wu=  	eventConsumer.get();
+			       // return eventConsumer.get();
+			    	return eventConsumer.get().filter(
+			    			  s -> s.data().getSpanTraceId().equals(id)
+			    			
+			    			
+			    			);
+			    			
+			    			
+		
+	    	List<ServerSentEvent> wus = new ArrayList<>();
 		
 			    	Flux<ServerSentEvent<WorkUnit>>   obj= eventConsumer.get();
 			    	log.info("obj "+obj.toString());
@@ -103,14 +97,9 @@ public class EventController {
 			    	//  .log();
 			    	
 			    	
-			*/    	
-			    	//eventConsumer.get().flatMap(mapper)
-			    	//WorkUnit wu=  	eventConsumer.get();
-			       // return eventConsumer.get();
-			    	return eventConsumer.get().filter(
-			    			  s -> s.data().getSpanTraceId().equals(id)
+	
 			    			
-			    			
-			    			);
 			}
+
+*/
 }
