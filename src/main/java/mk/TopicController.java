@@ -35,6 +35,7 @@ import reactor.core.publisher.Mono;
 public class TopicController {
 
 	KafkaManager kafkaManager;
+	   private KafkaApplicationListener eventConsumer;
 
 	 public final EmitterProcessor<ServerSentEvent<TopicsList>> emitter = EmitterProcessor.create();	
 		
@@ -47,9 +48,10 @@ public class TopicController {
 	
 	 private static Logger log = LoggerFactory.getLogger(TopicController.class);
 
-	    public TopicController(KafkaManager kafkaManager)
+	    public TopicController(KafkaManager kafkaManager, KafkaApplicationListener eventConsumer)
 	    {
 
+	    	this.eventConsumer=eventConsumer;
 	        this.kafkaManager = kafkaManager;
 	    	 kafkaManager.init();
 	    }
@@ -121,4 +123,69 @@ public class TopicController {
 */
 	    //	return Flux.just(ServerSentEvent.builder(topicsList).id(UUID.randomUUID().toString()).build());
 		    	}
+	    
+
+	    @CrossOrigin(origins = "*")
+				    @GetMapping(name = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+				    public Flux<ServerSentEvent<WorkUnit>> getEvents(@RequestParam(value = "id", defaultValue = ".") String id)
+				    {
+				    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events for id "+id);
+		
+			    	//eventConsumer.get().flatMap(mapper)
+				    	//WorkUnit wu=  	eventConsumer.get();
+				       // return eventConsumer.get();
+				    	return eventConsumer.get().filter(
+
+				    			  (s) -> {
+				    				  
+				    				  log.info("s.data().toString() "+s.data().toString());
+				    				  return s.data().getSpanTraceId().equals(id);}
+
+//				    			  s -> s.data().getSpanTraceId().equals(id)
+				    			
+				    			
+				    			);
+				    			
+	/*			    			
+			
+		    	List<ServerSentEvent> wus = new ArrayList<>();
+			
+				    	Flux<ServerSentEvent<WorkUnit>>   obj= eventConsumer.get();
+				    	log.info("obj "+obj.toString());
+				    	
+				    	obj.subscribe(wus::add);
+			
+				    	log.info("wus.size() "+wus.size());
+			
+				    	
+			//	    	if (wus.size()==0) return Flux.empty();
+			//	    	if (wus.size()==0) return null;
+				    	
+				    	Mono<Long> count=obj.count();
+				    	
+				    	ServerSentEvent<WorkUnit> readsse=wus.get(0);
+				    	WorkUnit wu=readsse.data();
+				    	
+				    	//WorkUnit wu=wus.get(0);
+				    	//wu.setDefinition("mkdefinition");
+				    	//wu.setId("mkid");
+				    	//wu.setParentId("mkparentId");
+				    	//wu.setSpanTraceId("mkspanTraceId");
+			
+				    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu "+wu);
+				    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu count "+count);
+				    	
+			//	    	if (count.)
+				    	
+				    	//return Flux.just(ServerSentEvent.builder(wu).id(UUID.randomUUID().toString()).build())
+				    	//  .log();
+				    	
+				    	
+		
+				    	*/
+				    			
+				}
+
+
+	    
 }

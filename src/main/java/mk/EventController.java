@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
 @RestController
 public class EventController {
 
-
+/*
 	//KafkaManager kafkaManager;
 	
 	 private static Logger log = LoggerFactory.getLogger(EventController.class);
@@ -68,7 +68,7 @@ public class EventController {
 			    			
 			    			);
 			    			
-/*			    			
+
 		
 	    	List<ServerSentEvent> wus = new ArrayList<>();
 		
@@ -104,9 +104,9 @@ public class EventController {
 			    	
 			    	
 	
-			    	*/
+
 			    			
 			}
-
+*/
 
 }
