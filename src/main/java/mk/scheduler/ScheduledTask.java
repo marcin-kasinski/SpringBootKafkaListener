@@ -34,7 +34,7 @@ public class ScheduledTask {
 
 	int lasttopicsListsize=-1; 
 	
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 360000)
     public void reportCurrentTime() throws InterruptedException, ExecutionException {
         log.info("The time is now {}", dateFormat.format(new Date()));
         TopicsList topicsList= kafkaManager.getTopics();
