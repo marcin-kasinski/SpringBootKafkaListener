@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
 @RestController
 public class EventController {
 
-/*
+
 	//KafkaManager kafkaManager;
 	
 	 private static Logger log = LoggerFactory.getLogger(EventController.class);
@@ -48,7 +48,7 @@ public class EventController {
 			      .newCachedThreadPool();
 
     @CrossOrigin(origins = "*")
-			    @GetMapping(name = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+			    @GetMapping(name = "/events", value = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 			    public Flux<ServerSentEvent<WorkUnit>> getEvents(@RequestParam(value = "id", defaultValue = ".") String id)
 			    {
 			    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events for id "+id);
@@ -69,7 +69,7 @@ public class EventController {
 			    			);
 			    			
 
-		
+		/*
 	    	List<ServerSentEvent> wus = new ArrayList<>();
 		
 			    	Flux<ServerSentEvent<WorkUnit>>   obj= eventConsumer.get();
@@ -101,12 +101,9 @@ public class EventController {
 			    	
 			    	//return Flux.just(ServerSentEvent.builder(wu).id(UUID.randomUUID().toString()).build())
 			    	//  .log();
-			    	
-			    	
-	
 
-			    			
+			    	*/		
 			}
-*/
+
 
 }
