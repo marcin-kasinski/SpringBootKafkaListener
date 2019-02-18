@@ -49,10 +49,24 @@ public class EventController {
 
     @CrossOrigin(origins = "*")
 			    @GetMapping(name = "/events", value = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-			    public Flux<ServerSentEvent<WorkUnit>> getEvents(@RequestParam(value = "id", defaultValue = ".") String id)
+			    public Flux<ServerSentEvent<WorkUnit>> getEvents(@RequestParam(value = "id", defaultValue = ".") String id,@RequestHeader HttpHeaders headers)
 			    {
 			    	log.info("wuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu executing /events for id "+id);
-	
+			    	System.out.println("Headers start");
+			    	Set<String> keys = headers.keySet();
+					for (String key : keys) {
+
+						List<String> value = headers.get(key);
+
+						int size = value.size();
+						
+						for (int i=0;i<size;i++) 			System.out.println(key + " " +value.get(i));
+
+
+
+					}
+
+					System.out.println("Headers end");
 		    	//eventConsumer.get().flatMap(mapper)
 			    	//WorkUnit wu=  	eventConsumer.get();
 			       // return eventConsumer.get();
