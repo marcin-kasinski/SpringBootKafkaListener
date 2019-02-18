@@ -46,8 +46,8 @@ public class EventController {
 	    
 		 private ExecutorService nonBlockingService = Executors
 			      .newCachedThreadPool();
-		/*
-	    @CrossOrigin(origins = "*")
+
+    @CrossOrigin(origins = "*")
 			    @GetMapping(name = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 			    public Flux<ServerSentEvent<WorkUnit>> getEvents(@RequestParam(value = "id", defaultValue = ".") String id)
 			    {
@@ -57,12 +57,18 @@ public class EventController {
 			    	//WorkUnit wu=  	eventConsumer.get();
 			       // return eventConsumer.get();
 			    	return eventConsumer.get().filter(
-			    			  s -> s.data().getSpanTraceId().equals(id)
+
+			    			  (s) -> {
+			    				  
+			    				  log.info("s.data().toString() "+s.data().toString());
+			    				  return s.data().getSpanTraceId().equals(id);}
+
+//			    			  s -> s.data().getSpanTraceId().equals(id)
 			    			
 			    			
 			    			);
 			    			
-			    			
+/*			    			
 		
 	    	List<ServerSentEvent> wus = new ArrayList<>();
 		
@@ -98,8 +104,9 @@ public class EventController {
 			    	
 			    	
 	
+			    	*/
 			    			
 			}
 
-*/
+
 }
